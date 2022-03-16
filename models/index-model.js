@@ -1,7 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
 
 module.exports = function (sequelize) {
-    class Index extends Model {}
+    class Index extends Model { }
 
     Index.init(
         {
@@ -30,6 +30,11 @@ module.exports = function (sequelize) {
             genreId: {
                 type: DataTypes.INTEGER,
                 field: "genre_id",
+            },
+            imageURL: {
+                type: DataTypes.STRING,
+                allowNull: true,
+                field: "image_url",
             },
             createdAt: {
                 type: DataTypes.DATE,

@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const ReviewController = require("../controllers/reviewController");
-const GrabController = require("../controllers/grabController");
-const WishlistController = require("../controllers/wishlistController");
-const AccountController = require("../controllers/accountController");
-const AdminController = require("../controllers/adminController");
-const UploadController = require("../controllers/uploadController");
+const ReviewController = require("../controllers/review-controller");
+const GrabController = require("../controllers/grab-controller");
+const WishlistController = require("../controllers/wishlist-controller");
+const AccountController = require("../controllers/account-controller");
+const AdminController = require("../controllers/admin-controller");
+const UploadController = require("../controllers/upload-controller");
 
 
 const reviewController = new ReviewController();
@@ -17,7 +17,7 @@ const adminController = new AdminController();
 const uploadController = new UploadController();
 
 
-router.post("/protected/:indexId/addReview", reviewController.addReview);
+router.post("/protected/addReview", reviewController.addReview);
 
 // for grabbing book with credit
 router.post('/protected/grab', grabController.grabBook);
@@ -45,7 +45,14 @@ router.get("/protected/viewprofile", accountController.viewProfile);
 router.put("/protected/editprofile", accountController.editProfile);
 
 // actions that need admin permissions
-// edit user type - USER, ADMIN or BANNED
-router.put("/protected/admin/edituser", adminController.editUserType);
+
+// edit user type to USER, ADMIN or BANNED
+router.put("/protected/admin/usertype", adminController.userType);
+
+// view all users, returning only safe data
+router.get("/protected/admin/viewusers", adminController.viewUsers);
+
+// search for user
+router.get("/protected/admin/searchuser", adminController.searchUser);
 
 module.exports = router;
